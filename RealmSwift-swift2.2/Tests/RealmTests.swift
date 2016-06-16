@@ -25,10 +25,6 @@ import XCTest
 import Foundation
 
 class RealmTests: TestCase {
-    enum TestError: ErrorType {
-        case Exception
-    }
-
     func testFileURL() {
         XCTAssertEqual(try! Realm(fileURL: testRealmURL()).configuration.fileURL,
                        testRealmURL())
@@ -261,19 +257,19 @@ class RealmTests: TestCase {
     }
 
     func testThrowsWrite() {
-        assertFails(TestError.Exception) {
+        assertFails(Error.Fail) {
             try Realm().write {
-                throw TestError.Exception
+                throw Error.Fail
             }
         }
-        assertFails(TestError.Exception) {
+        assertFails(Error.Fail) {
             try Realm().write {
                 try! Realm().create(SwiftStringObject.self, value: ["1"])
-                throw TestError.Exception
+                throw Error.Fail
             }
         }
     }
-    
+
     func testInWriteTransaction() {
         let realm = try! Realm()
         XCTAssertFalse(realm.inWriteTransaction)
