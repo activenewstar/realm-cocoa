@@ -96,8 +96,10 @@ public final class Realm {
     // MARK: Transactions
 
     /**
-     Performs actions contained within the given block inside a write transaction. If the block throws an exception, the
-     transaction will be canceled, reverting any writes made in the block before the exception was thrown.
+     Performs actions contained within the given block inside a write transaction.
+     
+     If the block throws an exception, the transaction will be canceled, reverting any writes made in the block before
+     the exception was thrown.
 
      Write transactions cannot be nested, and trying to execute a write transaction on a Realm which is already
      participating in a write transaction will throw an error. Calls to `write` from `Realm` instances in other threads
@@ -109,8 +111,8 @@ public final class Realm {
 
      - parameter block: The block containing actions to perform, optionally throwing on failure.
 
-     - throws: An `NSError` if the transaction could not be completed successfully. If `block` throws, the propagated `ErrorType`.
-     
+     - throws: An `NSError` if the transaction could not be completed successfully.
+               If `block` throws, the propagated `ErrorType`.
      */
     public func write(@noescape block: (() throws -> Void)) throws {
         beginWrite()
