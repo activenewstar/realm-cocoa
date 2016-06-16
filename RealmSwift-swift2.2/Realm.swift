@@ -97,7 +97,7 @@ public final class Realm {
 
     /**
      Performs actions contained within the given block inside a write transaction.
-     
+
      If the block throws an exception, the transaction will be canceled, reverting any writes made in the block before
      the exception was thrown.
 
